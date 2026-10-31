@@ -1,0 +1,49 @@
+{
+  "contentType": "collection",
+  "contentId": "motd-default-collection",
+  "tcId": "634e8e85-e2fc-4c68-bb10-93604cf6605f",
+  "contentItems": [
+    {
+      "contentType": "content-item",
+      "contentId": "46874c56-0973-4cbe-ac98-b580c5b36df5",
+      "tcId": "61fb3dd8-f23d-45cc-9058-058ab223ba5c",
+      "contentFields": {
+        "body": { "en": "Backend made by Helix.67 on discord" },
+        "entryType": "Website",
+        "image": [{ "width": 1280, "height": 720, "url": "https://cdn2.unrealengine.com/t-bp19-lobby-xmas-2048x1024-f85d2684b4af.png" }],
+        "tabTitleOverride": "Helix Backend",
+        "tileImage": [{ "width": 1280, "height": 720, "url": "https://cdn2.unrealengine.com/t-bp19-lobby-xmas-2048x1024-f85d2684b4af.png" }],
+        "title": { "en": "Welcome to Helix Backend" },
+        "videoAutoplay": false,
+        "videoLoop": false,
+        "videoMute": false,
+        "videoStreamingEnabled": false,
+        "websiteButtonText": "Join Discord",
+        "websiteURL": "https://discord.gg/ogfncenter"
+      },
+      "contentHash": "helixbackendnews1",
+      "contentSchemaName": "MotdWebsiteNewsWithVideo"
+    },
+    {
+      "contentType": "content-item",
+      "contentId": "57985c67-1084-5d79-bd09-c691d7d756g6",
+      "tcId": "72gc4ee9-g34e-56dd-a169-169bc334cb6d",
+      "contentFields": {
+        "body": { "en": "Join our Discord for updates, support, and community events!" },
+        "entryType": "Website",
+        "image": [{ "width": 1280, "height": 720, "url": "https://cdn2.unrealengine.com/t-bp20-lobby-2048x1024-d89eb522746c.png" }],
+        "tabTitleOverride": "Helix News",
+        "tileImage": [{ "width": 1280, "height": 720, "url": "https://cdn2.unrealengine.com/t-bp20-lobby-2048x1024-d89eb522746c.png" }],
+        "title": { "en": "Helix Community" },
+        "videoAutoplay": false,
+        "videoLoop": false,
+        "videoMute": false,
+        "videoStreamingEnabled": false,
+        "websiteButtonText": "Join Discord",
+        "websiteURL": "https://discord.gg/ogfncenter"
+      },
+      "contentHash": "helixbackendnews2",
+      "contentSchemaName": "MotdWebsiteNewsWithVideo"
+    }
+  ]
+}

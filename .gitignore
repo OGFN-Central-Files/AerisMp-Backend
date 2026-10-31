@@ -1,0 +1,4 @@
+node_modules
+
+# Gameserver host account credentials — never commit
+gameserver.json5

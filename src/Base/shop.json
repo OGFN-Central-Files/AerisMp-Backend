@@ -1,0 +1,16 @@
+{
+  "daily1": {"itemGrants":["AthenaCharacter:CID_193_Athena_Commando_F_Hippie"],"price":1500},
+  "daily2": {"itemGrants":["AthenaCharacter:CID_416_Athena_Commando_M_AssassinSuit"],"price":2000},
+  "daily3": {"itemGrants":["AthenaDance:EID_TimetravelBackflip"],"price":500},
+  "daily4": {"itemGrants":["AthenaBackpack:BID_293_GlowBroFemale"],"price":1500},
+  "daily5": {"itemGrants":["AthenaGlider:Glider_ID_064_Biker"],"price":500},
+  "daily6": {"itemGrants":["AthenaPickaxe:Pickaxe_ID_215_Pug"],"price":500},
+  "daily7": {"itemGrants":["AthenaLoadingscreen:LSID_146_WorldCup2019"],"price":200},
+  "daily8": {"itemGrants":["AthenaEmoji:Emoji_BabySeal"],"price":200},
+  "featured1": {"itemGrants":["AthenaCharacter:CID_300_Athena_Commando_F_Angel"],"price":2000},
+  "featured2": {"itemGrants":["AthenaCharacter:CID_347_Athena_Commando_M_PirateProgressive"],"price":2000},
+  "featured3": {"itemGrants":["AthenaDance:EID_AprilBevie_Sync"],"price":200},
+  "featured4": {"itemGrants":["AthenaBackpack:BID_209_RobotTroubleMale"],"price":1500},
+  "featured5": {"itemGrants":["AthenaGlider:Glider_Bold"],"price":500},
+  "featured6": {"itemGrants":["AthenaPickaxe:Pickaxe_ID_082_SushiChef"],"price":800}
+}

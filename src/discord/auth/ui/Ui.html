@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeris — Auth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #00d4ff;
+            --accent2: #0077ff;
+            --bg: #080c14;
+            --card: #0d1420;
+            --border: rgba(0, 212, 255, 0.15);
+            --text: #e8f4ff;
+            --muted: #4a6080;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Grid background */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        /* Glow orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            opacity: 0.35;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #0077ff, transparent 70%);
+            top: -100px;
+            left: -100px;
+            animation: drift 10s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #00d4ff, transparent 70%);
+            bottom: -80px;
+            right: -80px;
+            animation: drift 14s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 20px); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scanline {
+            0%   { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        /* Card */
+        .card {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 400px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            animation: fadeUp 0.6s ease both;
+            overflow: hidden;
+        }
+
+        /* Scanline effect */
+        .card::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+            animation: scanline 4s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Top accent bar */
+        .card-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent2), var(--accent));
+            border-radius: 16px 16px 0 0;
+        }
+
+        /* Logo / brand */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent2), var(--accent));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: -1px;
+        }
+
+        .brand-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 1px;
+        }
+
+        .brand-name span {
+            color: var(--accent);
+        }
+
+        /* Avatar */
+        .avatar-wrap {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.25rem;
+            position: relative;
+        }
+
+        .avatar-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent2), var(--accent));
+            z-index: 0;
+        }
+
+        .avatar-wrap img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border: 3px solid var(--card);
+        }
+
+        .avatar-fallback {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent2), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+            border: 3px solid var(--card);
+        }
+
+        /* User info */
+        .user-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .user-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .user-tag {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin-bottom: 1.75rem;
+        }
+
+        /* Status row */
+        .status-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00ff88;
+            box-shadow: 0 0 8px #00ff88;
+            flex-shrink: 0;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .status-text {
+            font-size: 0.8rem;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+
+        .status-text strong {
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        /* Launch button */
+        .launch-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, var(--accent2), var(--accent));
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: opacity 0.2s, transform 0.15s;
+        }
+
+        .launch-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.4s;
+        }
+
+        .launch-btn:hover::before { left: 100%; }
+        .launch-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .launch-btn:active { transform: translateY(0); opacity: 1; }
+
+        /* Footer */
+        .footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+
+        .footer span {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="card">
+        <div class="card-accent"></div>
+
+        <div class="brand">
+            <div class="brand-icon">HX</div>
+            <div class="brand-name">Heli<span>x</span></div>
+        </div>
+
+        <div class="avatar-wrap" id="avatar-wrap">
+            <div class="avatar-fallback" id="avatar-fallback">?</div>
+            <img id="profile-pic" src="" alt="Avatar" style="display:none;">
+        </div>
+
+        <div class="user-info">
+            <div class="user-name" id="username">Connecting...</div>
+            <div class="user-tag">Aeris Player</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="status-row">
+            <div class="status-dot"></div>
+            <div class="status-text">Server status: <strong>Online</strong> — Authentication verified</div>
+        </div>
+
+        <button class="launch-btn" onclick="window.location.href='launcher:'">
+            Launch Game
+        </button>
+
+        <div class="footer">
+            Aeris Private Server &nbsp;·&nbsp; <span>v1.0</span>
+        </div>
+    </div>
+
+    <script>
+        async function loadUserData() {
+            try {
+                const res = await fetch('/api/user', { credentials: 'include' });
+                const user = await res.json();
+
+                document.getElementById('username').textContent = user.username || 'Unknown Player';
+
+                const img = document.getElementById('profile-pic');
+                const fallback = document.getElementById('avatar-fallback');
+
+                let avatarUrl = '';
+                if (user.avatar) {
+                    avatarUrl = `https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png`;
+                } else {
+                    const idx = Number(user.discriminator) % 5;
+                    avatarUrl = `https://cdn.discordapp.com/embed/avatars/${idx}.png`;
+                }
+
+                img.src = avatarUrl;
+                img.onload = () => {
+                    img.style.display = 'block';
+                    fallback.style.display = 'none';
+                };
+                img.onerror = () => {
+                    img.style.display = 'none';
+                    fallback.textContent = (user.username || '?')[0].toUpperCase();
+                };
+            } catch (e) {
+                console.error('Auth error:', e);
+                window.location.href = '/auth/discord';
+            }
+        }
+
+        loadUserData();
+    </script>
+</body>
+</html>
